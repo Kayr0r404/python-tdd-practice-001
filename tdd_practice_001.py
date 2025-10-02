@@ -1,0 +1,69 @@
+def increment_string(string):
+    """
+       Description: Increment the numeric suffix of a string.
+
+    If the string ends with a number, increment that number by 1.
+    If the string does not end with a number, append 1.
+    Examples:
+
+    "foo" -> "foo1"
+    "foobar23" -> "foobar24"
+    "foo0042" -> "foo0043"
+    "foo9" -> "foo10"
+    """
+    num = ""
+    if not string[-1].isdigit() or len(string) == 0:
+        return string + str(1)
+    for i in range(len(string)):
+        if string[len(string) - 1 - i].isalpha():
+            break
+        idx = len(string) - 1 - i
+        num += string[len(string) - 1 - i]
+        print(num)
+    return f"{string[:idx]}{int(num[::-1]) + 1:0{len(num)}d}"
+
+
+def count_letters(string):
+    """
+       Description: Count the occurrences of each letter in a string.
+
+    Example:
+
+    "aba" -> {"a": 2, "b": 1}
+    """
+
+    occurance = {}
+    for char in string.lower():
+        occurance[char] = string.count(char)
+    return occurance
+
+
+def sum_consecutives(s):
+    """
+    Description: Return a list of sums of each consecutive pair in a list.
+
+    Example:
+
+    [1, 2, 3] -> [3, 5]  # 1+2=3, 2+3=5
+    """
+    sum = []
+    for idx, num in enumerate(s):
+        if idx + 1 < len(s):
+            sum.append(num + s[idx + 1])
+    return sum
+
+
+print(sum_consecutives([1, 2, 3]))
+
+
+def count_unique(string):
+    '''
+    Description: Count the number of unique words in a string.
+
+    Should raise a ValueError if the input is not a string.
+
+    Example:
+
+    "no example ;)"'''
+    if isinstance(string, str):
+        raise ValueError("passed param must be of str type.")
