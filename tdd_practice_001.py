@@ -64,7 +64,7 @@ def is_number(s):
         return False
 
 
-def count_unique(string):
+def count_unique(text):
     '''
     Description: Count the number of unique words in a string.
 
@@ -73,5 +73,14 @@ def count_unique(string):
     Example:
 
     "no example ;)"'''
-    if isinstance(string, str):
-        raise ValueError("passed param must be of str type.")
+
+    if not isinstance(text, str):
+        raise ValueError("Input must be a string")
+
+    words = text.lower().split()
+    # unique_words = set(words)
+    unique_words = []
+    for word in words:
+        if len(word) > 1 and word not in unique_words and word.isalpha():
+            unique_words.append(word)
+    return len(unique_words)

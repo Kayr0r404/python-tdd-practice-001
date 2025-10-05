@@ -75,7 +75,32 @@ class TestSumConsecutives(TestCase):
         self.assertListEqual(sum_consecutives([0.5, 1]), [1.5])
 
 
-class TestCountUnique(TestCase): ...
+class TestCountUniqueWords(TestCase):
+
+    def test_basic_example(self):
+        self.assertEqual(count_unique("no example ;)"), 2)
+
+    def test_case_insensitivity(self):
+        self.assertEqual(count_unique("Hello hello world"), 2)
+
+    def test_empty_string(self):
+        self.assertEqual(count_unique(""), 0)
+
+    def test_single_word(self):
+        self.assertEqual(count_unique("Python"), 1)
+
+    def test_multiple_unique_words(self):
+        self.assertEqual(count_unique("one two three four"), 4)
+
+    def test_repeated_words(self):
+        self.assertEqual(count_unique("test test test"), 1)
+
+    def test_non_string_input(self):
+        with self.assertRaises(ValueError):
+            count_unique(12345)
+
+    def test_string_with_punctuation(self):
+        self.assertEqual(count_unique("word, word"), 2)
 
 
 if __name__ == "__main__":
