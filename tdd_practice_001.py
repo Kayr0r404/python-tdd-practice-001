@@ -11,15 +11,15 @@ def increment_string(string):
     "foo0042" -> "foo0043"
     "foo9" -> "foo10"
     """
+
     num = ""
-    if not string[-1].isdigit() or len(string) == 0:
+    if len(string) == 0 or not string[-1].isdigit():
         return string + str(1)
     for i in range(len(string)):
         if string[len(string) - 1 - i].isalpha():
             break
         idx = len(string) - 1 - i
         num += string[len(string) - 1 - i]
-        print(num)
     return f"{string[:idx]}{int(num[::-1]) + 1:0{len(num)}d}"
 
 
@@ -27,14 +27,15 @@ def count_letters(string):
     """
        Description: Count the occurrences of each letter in a string.
 
-    Example:
+    Example::
 
     "aba" -> {"a": 2, "b": 1}
     """
 
     occurance = {}
-    for char in string.lower():
-        occurance[char] = string.count(char)
+    for char in string:
+        char = char.lower()
+        occurance[char] = string.lower().count(char)
     return occurance
 
 
@@ -48,12 +49,19 @@ def sum_consecutives(s):
     """
     sum = []
     for idx, num in enumerate(s):
+        if idx + 1 < len(s) and not (is_number(num) and is_number(s[idx + 1])):
+            raise ValueError("The list must be numerical list.")
         if idx + 1 < len(s):
             sum.append(num + s[idx + 1])
     return sum
 
 
-print(sum_consecutives([1, 2, 3]))
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 
 def count_unique(string):
